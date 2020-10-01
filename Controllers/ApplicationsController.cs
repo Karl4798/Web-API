@@ -30,7 +30,7 @@ namespace AdMedAPI.Controllers
 
 
         /// <summary>
-        /// Fetches a list of every application.
+        /// Fetches a list of all applications.
         /// </summary>
         /// <returns></returns>
         [HttpGet]

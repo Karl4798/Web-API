@@ -10,6 +10,7 @@ using AdMedAPI.Repository.IRepository;
 
 namespace AdMedAPI.Controllers
 {
+
     [Authorize]
     [Route("api/v{version:apiVersion}/Users")]
     //[Route("api/[controller]")]
@@ -23,6 +24,9 @@ namespace AdMedAPI.Controllers
             _userRepo = userRepo;
         }
 
+        /// <summary>
+        /// Authenticates a user account.
+        /// </summary>
         [AllowAnonymous]
         [HttpPost("authenticate")]
         public IActionResult Authenticate([FromBody] AuthenticationModel model)
@@ -38,6 +42,9 @@ namespace AdMedAPI.Controllers
 
         }
 
+        /// <summary>
+        /// Registers a new account.
+        /// </summary>
         [AllowAnonymous]
         [HttpPost("register")]
         public IActionResult Register([FromBody] AuthenticationModel model)

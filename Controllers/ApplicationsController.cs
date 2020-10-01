@@ -53,7 +53,7 @@ namespace AdMedAPI.Controllers
         }
 
         /// <summary>
-        /// Get individual application
+        /// Get an individual application.
         /// </summary>
         /// <param name="ApplicationId">The Id of the application</param>
         /// <returns></returns>
@@ -122,6 +122,10 @@ namespace AdMedAPI.Controllers
 
         }
 
+        /// <summary>
+        /// Updates a specific application.
+        /// </summary>
+        /// <returns></returns>
         [HttpPatch("{ApplicationId:int}", Name = "UpdateApplication")]
         [ProducesResponseType(204)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -148,6 +152,10 @@ namespace AdMedAPI.Controllers
 
         }
 
+        /// <summary>
+        /// Deletes an application.
+        /// </summary>
+        /// <returns></returns>
         [HttpDelete("{ApplicationId:int}", Name = "DeleteApplication")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]

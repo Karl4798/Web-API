@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AdMedAPI.Models
 {
+
     public class User
     {
 
@@ -17,4 +14,5 @@ namespace AdMedAPI.Models
         [NotMapped] public string Token { get; set; }
 
     }
+
 }

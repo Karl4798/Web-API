@@ -16,7 +16,6 @@ using AdMedAPI.Data;
 using AdMedAPI.ParkyMapper;
 using AdMedAPI.Repository;
 using AdMedAPI.Repository.IRepository;
-using ParkyAPI.Repository;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace AdMedAPI
@@ -41,7 +40,7 @@ namespace AdMedAPI
                         .Replace("[DataDirectory]", path)));
 
             services.AddScoped<IApplicationRepository, ApplicationRepository>();
-            services.AddScoped<IEmergencyContactRepository, EmergencyContactRepository>();
+            services.AddScoped<IResidentRepository, ResidentRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddAutoMapper(typeof(AdMedMappings));
             services.AddApiVersioning(options =>
@@ -146,13 +145,6 @@ namespace AdMedAPI
                     }
                     options.RoutePrefix = "";
                 });
-
-            //app.UseSwaggerUI(options =>
-            //{
-            //    options.SwaggerEndpoint("/swagger/ParkyOpenAPISpec/swagger.json", "AdMed API");
-            //    //options.SwaggerEndpoint("/swagger/ParkyOpenAPISpecTrails/swagger.json", "AdMed API Trails");
-            //    options.RoutePrefix = "";
-            //});
 
             app.UseRouting();
             app.UseCors(x => x

@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace AdMedAPI.Models
 {
+
     public class Medication
     {
 
@@ -13,7 +10,10 @@ namespace AdMedAPI.Models
         public int Id { get; set; }
         [Required] public string Name { get; set; }
         [Required] public int Quantity { get; set; }
+        [Required] public string TimeSchedule { get; set; }
         [Required] public string Notes { get; set; }
+        [Required] public int ResidentId { get; set; }
 
     }
+
 }

@@ -6,6 +6,7 @@ using AdMedAPI.Models;
 
 namespace AdMedAPI.Repository.IRepository
 {
+
     public interface IApplicationRepository
     {
 
@@ -19,4 +20,5 @@ namespace AdMedAPI.Repository.IRepository
         bool Save();
 
     }
+
 }

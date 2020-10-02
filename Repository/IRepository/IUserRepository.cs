@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using AdMedAPI.Models;
+﻿using AdMedAPI.Models;
 
 namespace AdMedAPI.Repository.IRepository
 {
+
     public interface IUserRepository
     {
 
@@ -14,4 +11,5 @@ namespace AdMedAPI.Repository.IRepository
         User Register(string username, string password);
 
     }
+
 }

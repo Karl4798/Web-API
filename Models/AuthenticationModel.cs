@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace AdMedAPI.Models
 {
+
     public class AuthenticationModel
     {
 
@@ -13,4 +14,5 @@ namespace AdMedAPI.Models
         [Required] public string Password { get; set; }
 
     }
+
 }

@@ -8,17 +8,20 @@ using AdMedAPI.Models.Dtos;
 
 namespace AdMedAPI.ParkyMapper
 {
+
     public class AdMedMappings : Profile
     {
 
         public AdMedMappings()
         {
+
             CreateMap<Application, ApplicationCreateDto>().ReverseMap();
             CreateMap<Application, ApplicationUpdateDto>().ReverseMap();
-            CreateMap<EmergencyContact, EmergencyContactCreateDto>().ReverseMap();
-            CreateMap<EmergencyContact, EmergencyContactUpdateDto>().ReverseMap();
+            CreateMap<Resident, ResidentCreateDto>().ReverseMap();
+            CreateMap<Resident, ResidentUpdateDto>().ReverseMap();
 
         }
 
     }
+
 }

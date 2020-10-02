@@ -1,22 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
-using static AdMedAPI.Models.Application;
+using static AdMedAPI.Models.Resident;
 
 namespace AdMedAPI.Models.Dtos
 {
 
-    public class ApplicationCreateDto
+    public class ResidentCreateDto
 
     {
 
-        // General information of the applicant
+        // General information of the resident
         [Required] public string FirstName { get; set; }
         [Required] public string LastName { get; set; }
         [Required] public Enums.Genders Gender { get; set; }
+        public string GenderString { get; set; }
         [Required] public string Allergies { get; set; }
         [Required] public DateTime DateOfBirth { get; set; }
         [Required] public string IdentityNumber { get; set; }
@@ -32,7 +30,9 @@ namespace AdMedAPI.Models.Dtos
         [Required] public string PharmacyTelephoneNumber { get; set; }
         [Required] public string PharmacyFaxNumber { get; set; }
         [Required] public int PrimaryContactId { get; set; }
-        [ForeignKey("PrimaryContactId")] public virtual PrimaryContactApplication PrimaryContact { get; set; }
+        [ForeignKey("PrimaryContactId")] public virtual PrimaryContactResident PrimaryContact { get; set; }
+        [Required] public int MedicationId { get; set; }
+        [ForeignKey("MedicationId")] public virtual Medication Medication { get; set; }
 
         // General information of the primary contact included in PrimaryContact
 

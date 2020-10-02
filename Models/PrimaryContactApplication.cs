@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace AdMedAPI.Models.Dtos
+namespace AdMedAPI.Models
 {
-    public class EmergencyContactUpdateDto
+
+    public class PrimaryContactApplication
     {
 
+        [Key]
         public int Id { get; set; }
         [Required] public string FirstName { get; set; }
         [Required] public string LastName { get; set; }
@@ -25,4 +22,5 @@ namespace AdMedAPI.Models.Dtos
         [Required] public int ApplicationId { get; set; }
 
     }
+
 }

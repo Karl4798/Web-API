@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion.Internal;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Converters;
 
 namespace AdMedAPI.Models
 {
@@ -18,8 +13,7 @@ namespace AdMedAPI.Models
         [Key] public int Id { get; set; }
         [Required] public string FirstName { get; set; }
         [Required] public string LastName { get; set; }
-        public enum Genders { Female, Male, Other }
-        [Required] public Genders Gender { get; set; }
+        [Required] public Enums.Genders Gender { get; set; }
         public string GenderString { get; set; }
         [Required] public string Allergies { get; set; }
         [Required] public DateTime DateOfBirth { get; set; }
@@ -36,7 +30,7 @@ namespace AdMedAPI.Models
         [Required] public string PharmacyTelephoneNumber { get; set; }
         [Required] public string PharmacyFaxNumber { get; set; }
         [Required] public int PrimaryContactId { get; set; }
-        [ForeignKey("PrimaryContactId")] public virtual PrimaryContact PrimaryContact { get; set; }
+        [ForeignKey("PrimaryContactId")] public virtual PrimaryContactApplication PrimaryContact { get; set; }
 
         // General information of the primary contact included in PrimaryContact
 

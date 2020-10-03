@@ -12,6 +12,7 @@ namespace AdMedAPI.Data
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) { }
 
         public DbSet<Application> Applications { get; set; }
+        public DbSet<Medication> Medications { get; set; }
         public DbSet<Resident> Residents { get; set; }
         public DbSet<User> Users { get; set; }
 

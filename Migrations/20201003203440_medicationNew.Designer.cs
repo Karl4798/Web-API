@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AdMedAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20200827160016_initial")]
-    partial class initial
+    [Migration("20201003203440_medicationNew")]
+    partial class medicationNew
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -103,66 +103,38 @@ namespace AdMedAPI.Migrations
                     b.ToTable("Applications");
                 });
 
-            modelBuilder.Entity("AdMedAPI.Models.EmergencyContact", b =>
+            modelBuilder.Entity("AdMedAPI.Models.Medication", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("ApplicationId")
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Notes")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Quantity")
                         .HasColumnType("int");
 
-                    b.Property<string>("CellTelephoneNumber")
+                    b.Property<int>("ResidentId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("TimeSchedule")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Email")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("HomeTelephoneNumber")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("IdentityNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PhysicalAddress")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PostCode")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("PostalAddress")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Relationship")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("WorkTelephoneNumber")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ApplicationId");
+                    b.HasIndex("ResidentId");
 
-                    b.ToTable("EmergencyContacts");
+                    b.ToTable("Medications");
                 });
 
-            modelBuilder.Entity("AdMedAPI.Models.PrimaryContact", b =>
+            modelBuilder.Entity("AdMedAPI.Models.PrimaryContactApplication", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -216,7 +188,146 @@ namespace AdMedAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("PrimaryContact");
+                    b.ToTable("PrimaryContactApplication");
+                });
+
+            modelBuilder.Entity("AdMedAPI.Models.PrimaryContactResident", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("CellTelephoneNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("HomeTelephoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("IdentityNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PhysicalAddress")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PostCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PostalAddress")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Relationship")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("ResidentId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("WorkTelephoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("PrimaryContactResident");
+                });
+
+            modelBuilder.Entity("AdMedAPI.Models.Resident", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Allergies")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("CellTelephoneNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("DateOfBirth")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("DoctorName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Gender")
+                        .HasColumnType("int");
+
+                    b.Property<string>("GenderString")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("HomeTelephoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("IdentityNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MedicalAid")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MedicalAidNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PharmacyFaxNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PharmacyName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PharmacyTelephoneNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("PrimaryContactId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Undertaker")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UndertakerTelephoneNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("WorkTelephoneNumber")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PrimaryContactId");
+
+                    b.ToTable("Residents");
                 });
 
             modelBuilder.Entity("AdMedAPI.Models.User", b =>
@@ -232,6 +343,9 @@ namespace AdMedAPI.Migrations
                     b.Property<string>("Role")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Salt")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Username")
                         .HasColumnType("nvarchar(max)");
 
@@ -242,18 +356,27 @@ namespace AdMedAPI.Migrations
 
             modelBuilder.Entity("AdMedAPI.Models.Application", b =>
                 {
-                    b.HasOne("AdMedAPI.Models.PrimaryContact", "PrimaryContact")
+                    b.HasOne("AdMedAPI.Models.PrimaryContactApplication", "PrimaryContact")
                         .WithMany()
                         .HasForeignKey("PrimaryContactId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("AdMedAPI.Models.EmergencyContact", b =>
+            modelBuilder.Entity("AdMedAPI.Models.Medication", b =>
                 {
-                    b.HasOne("AdMedAPI.Models.Application", "Application")
+                    b.HasOne("AdMedAPI.Models.Resident", "Resident")
                         .WithMany()
-                        .HasForeignKey("ApplicationId")
+                        .HasForeignKey("ResidentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("AdMedAPI.Models.Resident", b =>
+                {
+                    b.HasOne("AdMedAPI.Models.PrimaryContactResident", "PrimaryContact")
+                        .WithMany()
+                        .HasForeignKey("PrimaryContactId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

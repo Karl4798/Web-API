@@ -40,6 +40,7 @@ namespace AdMedAPI
                         .Replace("[DataDirectory]", path)));
 
             services.AddScoped<IApplicationRepository, ApplicationRepository>();
+            services.AddScoped<IMedicationRepository, MedicationRepository>();
             services.AddScoped<IResidentRepository, ResidentRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddAutoMapper(typeof(AdMedMappings));

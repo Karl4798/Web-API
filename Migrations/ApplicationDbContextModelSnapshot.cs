@@ -113,7 +113,6 @@ namespace AdMedAPI.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Notes")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Quantity")
@@ -128,7 +127,9 @@ namespace AdMedAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Medication");
+                    b.HasIndex("ResidentId");
+
+                    b.ToTable("Medications");
                 });
 
             modelBuilder.Entity("AdMedAPI.Models.PrimaryContactApplication", b =>
@@ -294,9 +295,6 @@ namespace AdMedAPI.Migrations
                     b.Property<string>("MedicalAidNumber")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("MedicationId")
-                        .HasColumnType("int");
-
                     b.Property<string>("PharmacyFaxNumber")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -324,8 +322,6 @@ namespace AdMedAPI.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("MedicationId");
 
                     b.HasIndex("PrimaryContactId");
 
@@ -365,14 +361,17 @@ namespace AdMedAPI.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("AdMedAPI.Models.Resident", b =>
+            modelBuilder.Entity("AdMedAPI.Models.Medication", b =>
                 {
-                    b.HasOne("AdMedAPI.Models.Medication", "Medication")
+                    b.HasOne("AdMedAPI.Models.Resident", "Resident")
                         .WithMany()
-                        .HasForeignKey("MedicationId")
+                        .HasForeignKey("ResidentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
 
+            modelBuilder.Entity("AdMedAPI.Models.Resident", b =>
+                {
                     b.HasOne("AdMedAPI.Models.PrimaryContactResident", "PrimaryContact")
                         .WithMany()
                         .HasForeignKey("PrimaryContactId")

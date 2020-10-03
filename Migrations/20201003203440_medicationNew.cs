@@ -2,7 +2,7 @@
 
 namespace AdMedAPI.Migrations
 {
-    public partial class @new : Migration
+    public partial class medicationNew : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

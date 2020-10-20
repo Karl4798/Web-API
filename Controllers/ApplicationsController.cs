@@ -134,7 +134,6 @@ namespace AdMedAPI.Controllers
         public IActionResult UpdateApplication(int ApplicationId, [FromBody] ApplicationUpdateDto ApplicationDto)
         {
 
-
             if (ApplicationDto == null || ApplicationId != ApplicationDto.Id)
             {
                 return BadRequest(ModelState);

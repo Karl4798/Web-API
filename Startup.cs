@@ -17,6 +17,7 @@ using AdMedAPI.ParkyMapper;
 using AdMedAPI.Repository;
 using AdMedAPI.Repository.IRepository;
 using Swashbuckle.AspNetCore.SwaggerGen;
+using System;
 
 namespace AdMedAPI
 {
@@ -75,7 +76,8 @@ namespace AdMedAPI
                         ValidateIssuerSigningKey = true,
                         IssuerSigningKey = new SymmetricSecurityKey(key),
                         ValidateIssuer = false,
-                        ValidateAudience = false
+                        ValidateAudience = false,
+                        ClockSkew = TimeSpan.Zero
                     };
                 });
 

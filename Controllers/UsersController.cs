@@ -47,7 +47,7 @@ namespace AdMedAPI.Controllers
         /// </summary>
         [AllowAnonymous]
         [HttpPost("register")]
-        public IActionResult Register([FromBody] AuthenticationModel model)
+        public IActionResult Register([FromBody] RegistrationModel model)
         {
             bool ifUserNameUnique = _userRepo.IsUniqueUser(model.Username);
             if (!ifUserNameUnique)
@@ -55,8 +55,13 @@ namespace AdMedAPI.Controllers
                 return BadRequest(new {message = "Username already exists"});
             }
 
-            var user = _userRepo.Register(model.Username, model.Password);
+            bool passwordsMatch = _userRepo.DoPasswordsMatch(model.Password, model.ConfirmPassword);
+            if (!passwordsMatch)
+            {
+                return BadRequest(new { message = "Passwords do not match" });
+            }
 
+            var user = _userRepo.Register(model.Username, model.Password, model.FirstName, model.LastName);
             if (user == null)
             {
                 return BadRequest(new {message = "Error while registering"});

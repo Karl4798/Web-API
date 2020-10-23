@@ -37,6 +37,18 @@ namespace AdMedAPI.Repository
             return false;
         }
 
+        public bool DoPasswordsMatch(string password, string confirmPassword)
+        {
+
+            if (!password.Equals(confirmPassword))
+            {
+                return false;
+            }
+
+            return true;
+
+        }
+
         public User Authenticate(string username, string password)
         {
 
@@ -79,7 +91,7 @@ namespace AdMedAPI.Repository
 
         }
 
-        public User Register(string username, string password)
+        public User Register(string username, string password, string firstname, string lastname)
         {
 
             if (_db.Users.Any(user => user.Username.Equals(username)))
@@ -90,6 +102,8 @@ namespace AdMedAPI.Repository
             User userObj = new User();
 
             userObj.Username = username; // Get the username
+            userObj.FirstName = firstname; // Get the first name
+            userObj.LastName = lastname; // Get the last name
             userObj.Salt = Convert.ToBase64String(RandomSalt.GetRandomSalt(16)); // Get random salt
             userObj.Password = Convert.ToBase64String(RandomSalt.SaltHashPassword(
                 Encoding.ASCII.GetBytes(password),
@@ -101,5 +115,6 @@ namespace AdMedAPI.Repository
             userObj.Password = "";
             return userObj;
         }
+
     }
 }

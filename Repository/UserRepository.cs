@@ -49,6 +49,32 @@ namespace AdMedAPI.Repository
 
         }
 
+        public User GetUser(string username)
+        {
+
+            var user = _db.Users.FirstOrDefault(a => a.Username == username);
+
+            if (user != null)
+            {
+
+                User userObj = new User()
+                {
+                    Id = user.Id,
+                    Role = user.Role,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    Username = user.Username,
+                    Password = user.Password
+                };
+
+                return userObj;
+
+            }
+
+            return null;
+
+        }
+
         public User Authenticate(string username, string password)
         {
 
@@ -114,6 +140,61 @@ namespace AdMedAPI.Repository
             _db.SaveChanges();
             userObj.Password = "";
             return userObj;
+
+        }
+
+        public bool ResetPassword(string username, string password, string confirmpassword, string existingpassword)
+        {
+
+            if (_db.Users.Any(user => user.Username.Equals(username)))
+            {
+
+                User user = _db.Users.Where(u => u.Username.Equals(username)).First();
+
+                // Calculate hash password from data of client and compare with hash in server with salt
+                var client_post_hash_password = Convert.ToBase64String(RandomSalt.SaltHashPassword(
+                    Encoding.ASCII.GetBytes(existingpassword),
+                    Convert.FromBase64String(user.Salt)));
+
+                if (client_post_hash_password.Equals(user.Password))
+                {
+
+                    user.Salt = Convert.ToBase64String(RandomSalt.GetRandomSalt(16)); // Get random salt
+                    user.Password = Convert.ToBase64String(RandomSalt.SaltHashPassword(
+                        Encoding.ASCII.GetBytes(password),
+                        Convert.FromBase64String(user.Salt)));
+
+                    _db.Users.Update(user);
+                    _db.SaveChanges();
+                    return true;
+
+                }
+
+                return false;
+
+            }
+
+            return false;
+
+        }
+
+        public bool UpdateUser(User userToUpdate)
+        {
+
+            User user = _db.Users.Where(u => u.Id == userToUpdate.Id).First();
+
+            user.Username = userToUpdate.Username;
+            user.FirstName = userToUpdate.FirstName;
+            user.LastName = userToUpdate.LastName;
+            user.Role = userToUpdate.Role;
+
+            _db.Users.Update(user);
+            return Save();
+        }
+
+        public bool Save()
+        {
+            return _db.SaveChanges() >= 0 ? true : false;
         }
 
     }

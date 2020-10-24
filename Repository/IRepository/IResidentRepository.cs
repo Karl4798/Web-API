@@ -12,7 +12,7 @@ namespace AdMedAPI.Repository.IRepository
 
         ICollection<Resident> GetResidents();
         Resident GetResident(int ResidentId);
-        bool ResidentExists(String id);
+        bool ResidentExists(string id);
         bool ResidentExists(int ResidentId);
         bool CreateResident(Resident Resident);
         bool UpdateResident(Resident Resident);

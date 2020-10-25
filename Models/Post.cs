@@ -13,10 +13,5 @@ namespace AdMedAPI.Models
         [Required] public string Content { get; set; }
         public DateTime TimeStamp { get; set; }
 
-        public Post()
-        {
-            TimeStamp = DateTime.Now;
-        }
-
     }
 }

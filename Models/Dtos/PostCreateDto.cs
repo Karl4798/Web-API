@@ -13,11 +13,6 @@ namespace AdMedAPI.Models.Dtos
         [Required] public string Content { get; set; }
         public DateTime TimeStamp { get; set; }
 
-        public PostCreateDto()
-        {
-            TimeStamp = DateTime.Now;
-        }
-
     }
 
 }

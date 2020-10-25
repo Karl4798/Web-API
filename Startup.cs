@@ -44,6 +44,7 @@ namespace AdMedAPI
             services.AddScoped<IMedicationRepository, MedicationRepository>();
             services.AddScoped<IResidentRepository, ResidentRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IPostRepository, PostRepository>();
             services.AddAutoMapper(typeof(AdMedMappings));
             services.AddApiVersioning(options =>
             {

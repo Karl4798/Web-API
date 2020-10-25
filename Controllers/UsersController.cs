@@ -77,6 +77,7 @@ namespace AdMedAPI.Controllers
         /// Resets a user password.
         /// </summary>
         [HttpPost("resetpassword")]
+        [Authorize(Roles = "Admin,Resident")]
         public IActionResult ResetPassword([FromBody] UserResetPasswordDto model)
         {
 
@@ -104,7 +105,7 @@ namespace AdMedAPI.Controllers
         [HttpGet("{username}", Name = "GetUser")]
         [ProducesResponseType(200, Type = typeof(User))]
         [ProducesResponseType(404)]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,Resident")]
         [ProducesDefaultResponseType]
         public IActionResult GetUser(string username)
         {
@@ -128,7 +129,7 @@ namespace AdMedAPI.Controllers
         [ProducesResponseType(204)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,Resident")]
         public IActionResult UpdateUser(int UserId, [FromBody] UserUpdateDto UserUpdateDto)
         {
 

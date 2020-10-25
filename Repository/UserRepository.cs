@@ -134,7 +134,7 @@ namespace AdMedAPI.Repository
             userObj.Password = Convert.ToBase64String(RandomSalt.SaltHashPassword(
                 Encoding.ASCII.GetBytes(password),
                 Convert.FromBase64String(userObj.Salt)));
-            userObj.Role = "Admin";
+            userObj.Role = "Resident";
 
             _db.Users.Add(userObj);
             _db.SaveChanges();

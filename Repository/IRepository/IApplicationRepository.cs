@@ -12,7 +12,7 @@ namespace AdMedAPI.Repository.IRepository
 
         ICollection<Application> GetApplications();
         Application GetApplication(int applicationId);
-        bool ApplicationExists(String id);
+        bool ApplicationExists(string id);
         bool ApplicationExists(int applicationId);
         bool CreateApplication(Application application);
         bool UpdateApplication(Application application);

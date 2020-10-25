@@ -21,6 +21,8 @@ namespace AdMedAPI.ParkyMapper
             CreateMap<Resident, ResidentUpdateDto>().ReverseMap();
             CreateMap<Medication, MedicationCreateDto>().ReverseMap();
             CreateMap<Medication, MedicationUpdateDto>().ReverseMap();
+            CreateMap<Post, PostCreateDto>().ReverseMap();
+            CreateMap<Post, PostUpdateDto>().ReverseMap();
             CreateMap<User, UserUpdateDto>().ReverseMap();
 
         }

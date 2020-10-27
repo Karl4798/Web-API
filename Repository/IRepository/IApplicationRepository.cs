@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using AdMedAPI.Models;
 
 namespace AdMedAPI.Repository.IRepository
 {
-
     public interface IApplicationRepository
     {
-
         ICollection<Application> GetApplications();
         Application GetApplication(int applicationId);
         bool ApplicationExists(string id);
@@ -18,7 +13,5 @@ namespace AdMedAPI.Repository.IRepository
         bool UpdateApplication(Application application);
         bool DeleteApplication(Application application);
         bool Save();
-
     }
-
 }

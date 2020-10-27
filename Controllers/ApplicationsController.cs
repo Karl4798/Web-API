@@ -16,18 +16,14 @@ namespace AdMedAPI.Controllers
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public class ApplicationsController : ControllerBase
     {
-
         private readonly IApplicationRepository _apRepo;
         private readonly IMapper _mapper;
 
         public ApplicationsController(IApplicationRepository applicationRepo, IMapper mapper)
         {
-
             _apRepo = applicationRepo;
             _mapper = mapper;
-
         }
-
 
         /// <summary>
         /// Fetches a list of all applications.
@@ -38,18 +34,13 @@ namespace AdMedAPI.Controllers
         [ProducesResponseType(200, Type = typeof(List<ApplicationUpdateDto>))]
         public IActionResult GetApplications()
         {
-
             var objList = _apRepo.GetApplications();
-
             var objDto = new List<ApplicationUpdateDto>();
-
             foreach (var obj in objList)
             {
                 objDto.Add(_mapper.Map<ApplicationUpdateDto>(obj));
             }
-
             return Ok(objDto);
-
         }
 
         /// <summary>
@@ -64,24 +55,13 @@ namespace AdMedAPI.Controllers
         [ProducesDefaultResponseType]
         public IActionResult GetApplication(int ApplicationId)
         {
-
             var obj = _apRepo.GetApplication(ApplicationId);
-
             if (obj == null)
             {
                 return NotFound();
             }
-
             var objDto = _mapper.Map<ApplicationUpdateDto>(obj);
-            //var objDto = new ApplicationDto()
-            //{
-            //    Created = obj.Created,
-            //    Id = obj.Id,
-            //    Name = obj.Name,
-            //    State = obj.State
-            //};
             return Ok(objDto);
-
         }
 
         /// <summary>
@@ -95,31 +75,23 @@ namespace AdMedAPI.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult CreateApplication([FromBody] ApplicationCreateDto ApplicationDto)
         {
-
             if (ApplicationDto == null)
             {
                 return BadRequest(ModelState);
             }
-
             if (_apRepo.ApplicationExists(ApplicationDto.IdentityNumber))
             {
                 ModelState.AddModelError("", "application Exists!");
                 return StatusCode(404, ModelState);
             }
-
             var ApplicationObj = _mapper.Map<Application>(ApplicationDto);
-
-
-
             if (!_apRepo.CreateApplication(ApplicationObj))
             {
                 ModelState.AddModelError("", $"Something went wrong when saving the record {ApplicationObj.IdentityNumber}");
                 return StatusCode(500, ModelState);
             }
-
             return CreatedAtRoute("GetApplication", new { version = HttpContext.GetRequestedApiVersion().ToString(),
                                                                             ApplicationId = ApplicationObj.Id }, ApplicationObj);
-
         }
 
         /// <summary>
@@ -133,22 +105,17 @@ namespace AdMedAPI.Controllers
         [Authorize(Roles = "Admin")]
         public IActionResult UpdateApplication(int ApplicationId, [FromBody] ApplicationUpdateDto ApplicationDto)
         {
-
             if (ApplicationDto == null || ApplicationId != ApplicationDto.Id)
             {
                 return BadRequest(ModelState);
             }
-
             var ApplicationObj = _mapper.Map<Application>(ApplicationDto);
-
             if (!_apRepo.UpdateApplication(ApplicationObj))
             {
                 ModelState.AddModelError("", $"Something went wrong when updating the record {ApplicationObj.IdentityNumber}");
                 return StatusCode(500, ModelState);
             }
-
             return NoContent();
-
         }
 
         /// <summary>
@@ -163,23 +130,17 @@ namespace AdMedAPI.Controllers
         [Authorize(Roles = "Admin")]
         public IActionResult DeleteApplication(int ApplicationId)
         {
-
             if (!_apRepo.ApplicationExists(ApplicationId))
             {
                 return NotFound();
             }
-
             var ApplicationObj = _apRepo.GetApplication(ApplicationId);
-
             if (!_apRepo.DeleteApplication(ApplicationObj))
             {
                 ModelState.AddModelError("", $"Something went wrong when deleting the record {ApplicationObj.IdentityNumber}");
                 return StatusCode(500, ModelState);
             }
-
             return NoContent();
-
         }
-
     }
 }

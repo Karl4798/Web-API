@@ -2,10 +2,8 @@
 
 namespace AdMedAPI.Models
 {
-
     public class PrimaryContactResident
     {
-
         [Key]
         public int Id { get; set; }
         [Required] public string FirstName { get; set; }
@@ -20,7 +18,5 @@ namespace AdMedAPI.Models
         [Required] public string CellTelephoneNumber { get; set; }
         [Required] public string Email { get; set; }
         [Required] public int ResidentId { get; set; }
-
     }
-
 }

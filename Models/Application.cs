@@ -5,10 +5,8 @@ using Newtonsoft.Json;
 
 namespace AdMedAPI.Models
 {
-
     public class Application
     {
-
         // General information of the applicant
         [Key] public int Id { get; set; }
         [Required] public string FirstName { get; set; }
@@ -31,9 +29,6 @@ namespace AdMedAPI.Models
         [Required] public string PharmacyFaxNumber { get; set; }
         [Required] public int PrimaryContactId { get; set; }
         [ForeignKey("PrimaryContactId")] public virtual PrimaryContactApplication PrimaryContact { get; set; }
-
         // General information of the primary contact included in PrimaryContact
-
     }
-
 }

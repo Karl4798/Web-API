@@ -3,10 +3,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AdMedAPI.Models
 {
-
     public class Medication
     {
-
         [Key]
         public int Id { get; set; }
         [Required] public string Name { get; set; }
@@ -15,7 +13,5 @@ namespace AdMedAPI.Models
         public string Notes { get; set; }
         [Required] public int ResidentId { get; set; }
         [ForeignKey("ResidentId")] public Resident Resident { get; set; }
-
     }
-
 }

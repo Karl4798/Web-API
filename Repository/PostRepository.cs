@@ -8,7 +8,6 @@ namespace AdMedAPI.Repository
 {
     public class PostRepository : IPostRepository
     {
-
         private readonly ApplicationDbContext _db;
 
         public PostRepository(ApplicationDbContext db)

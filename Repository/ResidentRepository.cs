@@ -9,7 +9,6 @@ namespace AdMedAPI.Repository
 {
     public class ResidentRepository : IResidentRepository
     {
-
         private readonly ApplicationDbContext _db;
 
         public ResidentRepository(ApplicationDbContext db)

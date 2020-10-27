@@ -15,18 +15,14 @@ namespace AdMedAPI.Controllers
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public class PostsController : ControllerBase
     {
-
         private readonly IPostRepository _psRepo;
         private readonly IMapper _mapper;
 
         public PostsController(IPostRepository PostRepo, IMapper mapper)
         {
-
             _psRepo = PostRepo;
             _mapper = mapper;
-
         }
-
 
         /// <summary>
         /// Fetches a list of all Posts.
@@ -37,18 +33,13 @@ namespace AdMedAPI.Controllers
         [ProducesResponseType(200, Type = typeof(List<PostUpdateDto>))]
         public IActionResult GetPosts()
         {
-
             var objList = _psRepo.GetPosts();
-
             var objDto = new List<PostUpdateDto>();
-
             foreach (var obj in objList)
             {
                 objDto.Add(_mapper.Map<PostUpdateDto>(obj));
             }
-
             return Ok(objDto);
-
         }
 
         /// <summary>
@@ -63,17 +54,13 @@ namespace AdMedAPI.Controllers
         [ProducesDefaultResponseType]
         public IActionResult GetPost(int PostId)
         {
-
             var obj = _psRepo.GetPost(PostId);
-
             if (obj == null)
             {
                 return NotFound();
             }
-
             var objDto = _mapper.Map<PostUpdateDto>(obj);
             return Ok(objDto);
-
         }
 
         /// <summary>
@@ -88,23 +75,18 @@ namespace AdMedAPI.Controllers
         [Authorize(Roles = "Admin")]
         public IActionResult CreatePost([FromBody] PostCreateDto PostDto)
         {
-
             if (PostDto == null)
             {
                 return BadRequest(ModelState);
             }
-
             var PostObj = _mapper.Map<Post>(PostDto);
-
             if (!_psRepo.CreatePost(PostObj))
             {
                 ModelState.AddModelError("", $"Something went wrong when saving the record {PostObj.Id}");
                 return StatusCode(500, ModelState);
             }
-
             return CreatedAtRoute("GetPost", new { version = HttpContext.GetRequestedApiVersion().ToString(),
                                                                             PostId = PostObj.Id }, PostObj);
-
         }
 
         /// <summary>
@@ -118,23 +100,17 @@ namespace AdMedAPI.Controllers
         [Authorize(Roles = "Admin")]
         public IActionResult UpdatePost(int PostId, [FromBody] PostUpdateDto PostDto)
         {
-
-
             if (PostDto == null || PostId != PostDto.Id)
             {
                 return BadRequest(ModelState);
             }
-
             var PostObj = _mapper.Map<Post>(PostDto);
-
             if (!_psRepo.UpdatePost(PostObj))
             {
                 ModelState.AddModelError("", $"Something went wrong when updating the record {PostObj.Id}");
                 return StatusCode(500, ModelState);
             }
-
             return NoContent();
-
         }
 
         /// <summary>
@@ -149,23 +125,17 @@ namespace AdMedAPI.Controllers
         [Authorize(Roles = "Admin")]
         public IActionResult DeletePost(int PostId)
         {
-
             if (!_psRepo.PostExists(PostId))
             {
                 return NotFound();
             }
-
             var PostObj = _psRepo.GetPost(PostId);
-
             if (!_psRepo.DeletePost(PostObj))
             {
                 ModelState.AddModelError("", $"Something went wrong when deleting the record {PostObj.Id}");
                 return StatusCode(500, ModelState);
             }
-
             return NoContent();
-
         }
-
     }
 }

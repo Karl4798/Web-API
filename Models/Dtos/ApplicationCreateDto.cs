@@ -8,11 +8,8 @@ using static AdMedAPI.Models.Application;
 
 namespace AdMedAPI.Models.Dtos
 {
-
     public class ApplicationCreateDto
-
     {
-
         // General information of the applicant
         [Required] public string FirstName { get; set; }
         [Required] public string LastName { get; set; }
@@ -33,9 +30,6 @@ namespace AdMedAPI.Models.Dtos
         [Required] public string PharmacyFaxNumber { get; set; }
         [Required] public int PrimaryContactId { get; set; }
         [ForeignKey("PrimaryContactId")] public virtual PrimaryContactApplication PrimaryContact { get; set; }
-
         // General information of the primary contact included in PrimaryContact
-
     }
-
 }

@@ -15,18 +15,14 @@ namespace AdMedAPI.Controllers
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public class ResidentsController : ControllerBase
     {
-
         private readonly IResidentRepository _reRepo;
         private readonly IMapper _mapper;
 
         public ResidentsController(IResidentRepository ResidentRepo, IMapper mapper)
         {
-
             _reRepo = ResidentRepo;
             _mapper = mapper;
-
         }
-
 
         /// <summary>
         /// Fetches a list of all Residents.
@@ -37,18 +33,13 @@ namespace AdMedAPI.Controllers
         [ProducesResponseType(200, Type = typeof(List<ResidentUpdateDto>))]
         public IActionResult GetResidents()
         {
-
             var objList = _reRepo.GetResidents();
-
             var objDto = new List<ResidentUpdateDto>();
-
             foreach (var obj in objList)
             {
                 objDto.Add(_mapper.Map<ResidentUpdateDto>(obj));
             }
-
             return Ok(objDto);
-
         }
 
         /// <summary>
@@ -63,17 +54,13 @@ namespace AdMedAPI.Controllers
         [ProducesDefaultResponseType]
         public IActionResult GetResident(int ResidentId)
         {
-
             var obj = _reRepo.GetResident(ResidentId);
-
             if (obj == null)
             {
                 return NotFound();
             }
-
             var objDto = _mapper.Map<ResidentUpdateDto>(obj);
             return Ok(objDto);
-
         }
 
         /// <summary>
@@ -87,31 +74,23 @@ namespace AdMedAPI.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public IActionResult CreateResident([FromBody] ResidentCreateDto ResidentDto)
         {
-
             if (ResidentDto == null)
             {
                 return BadRequest(ModelState);
             }
-
             if (_reRepo.ResidentExists(ResidentDto.IdentityNumber))
             {
                 ModelState.AddModelError("", "Resident Exists!");
                 return StatusCode(404, ModelState);
             }
-
             var ResidentObj = _mapper.Map<Resident>(ResidentDto);
-
-
-
             if (!_reRepo.CreateResident(ResidentObj))
             {
                 ModelState.AddModelError("", $"Something went wrong when saving the record {ResidentObj.IdentityNumber}");
                 return StatusCode(500, ModelState);
             }
-
             return CreatedAtRoute("GetResident", new { version = HttpContext.GetRequestedApiVersion().ToString(),
                                                                             ResidentId = ResidentObj.Id }, ResidentObj);
-
         }
 
         /// <summary>
@@ -125,23 +104,17 @@ namespace AdMedAPI.Controllers
         [Authorize(Roles = "Admin")]
         public IActionResult UpdateResident(int ResidentId, [FromBody] ResidentUpdateDto ResidentDto)
         {
-
-
             if (ResidentDto == null || ResidentId != ResidentDto.Id)
             {
                 return BadRequest(ModelState);
             }
-
             var ResidentObj = _mapper.Map<Resident>(ResidentDto);
-
             if (!_reRepo.UpdateResident(ResidentObj))
             {
                 ModelState.AddModelError("", $"Something went wrong when updating the record {ResidentObj.IdentityNumber}");
                 return StatusCode(500, ModelState);
             }
-
             return NoContent();
-
         }
 
         /// <summary>
@@ -156,23 +129,17 @@ namespace AdMedAPI.Controllers
         [Authorize(Roles = "Admin")]
         public IActionResult DeleteResident(int ResidentId)
         {
-
             if (!_reRepo.ResidentExists(ResidentId))
             {
                 return NotFound();
             }
-
             var ResidentObj = _reRepo.GetResident(ResidentId);
-
             if (!_reRepo.DeleteResident(ResidentObj))
             {
                 ModelState.AddModelError("", $"Something went wrong when deleting the record {ResidentObj.IdentityNumber}");
                 return StatusCode(500, ModelState);
             }
-
             return NoContent();
-
         }
-
     }
 }

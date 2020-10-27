@@ -4,10 +4,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AdMedAPI.Models
 {
-
     public class Resident
     {
-
         // General information of the resident
         [Key] public int Id { get; set; }
         [Required] public string FirstName { get; set; }
@@ -30,9 +28,6 @@ namespace AdMedAPI.Models
         [Required] public string PharmacyFaxNumber { get; set; }
         [Required] public int PrimaryContactId { get; set; }
         [ForeignKey("PrimaryContactId")] public virtual PrimaryContactResident PrimaryContact { get; set; }
-
         // General information of the primary contact included in PrimaryContact
-
     }
-
 }

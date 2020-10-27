@@ -1,16 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace AdMedAPI.Models
+﻿namespace AdMedAPI.Models
 {
-
     public class Enums
     {
-
         public enum Genders { Female, Male, Other }
-
     }
-
 }

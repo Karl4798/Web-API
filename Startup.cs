@@ -13,11 +13,11 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using AdMedAPI.Data;
-using AdMedAPI.ParkyMapper;
 using AdMedAPI.Repository;
 using AdMedAPI.Repository.IRepository;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System;
+using AdMedAPI.AdMedMapper;
 
 namespace AdMedAPI
 {
@@ -39,7 +39,6 @@ namespace AdMedAPI
                 options.UseSqlServer(
                     Configuration.GetConnectionString("DefaultConnection")
                         .Replace("[DataDirectory]", path)));
-
             services.AddScoped<IApplicationRepository, ApplicationRepository>();
             services.AddScoped<IMedicationRepository, MedicationRepository>();
             services.AddScoped<IResidentRepository, ResidentRepository>();
@@ -52,17 +51,13 @@ namespace AdMedAPI
                 options.DefaultApiVersion = new ApiVersion(1, 0);
                 options.ReportApiVersions = true;
             });
-
             services.AddVersionedApiExplorer(options => options.GroupNameFormat = "'v'VVV");
             services.AddTransient<IConfigureOptions<SwaggerGenOptions>, ConfigureSwaggerOptions>();
             services.AddSwaggerGen();
             var appSettingsSection = Configuration.GetSection("AppSettings");
-
             services.Configure<AppSettings>(appSettingsSection);
-
             var appSettings = appSettingsSection.Get<AppSettings>();
             var key = Encoding.ASCII.GetBytes(appSettings.Secret);
-
             services.AddAuthentication(x =>
                 {
                     x.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -81,52 +76,6 @@ namespace AdMedAPI
                         ClockSkew = TimeSpan.Zero
                     };
                 });
-
-            //services.AddSwaggerGen(options =>
-            //{
-            //    options.SwaggerDoc("ParkyOpenAPISpec",
-            //        new OpenApiInfo()
-            //        {
-            //            Title = "AdMed API",
-            //            Version = "1",
-            //            Description = "Udemy AdMed API",
-            //            Contact = new OpenApiContact()
-            //            {
-            //                Email = "karl4798@gmail.com",
-            //                Name = "Karl de Busser",
-            //                Url = new Uri("https://karldebusser.com")
-            //            },
-            //            License = new OpenApiLicense()
-            //            {
-            //                Name = "MIT License",
-            //                Url = new Uri("https://en.wikipedia.org/wiki/MIT_License")
-            //            }
-            //        });
-
-            //    options.SwaggerDoc("ParkyOpenAPISpecTrails",
-            //        new OpenApiInfo()
-            //        {
-            //            Title = "AdMed API (Trails)",
-            //            Version = "1",
-            //            Description = "Udemy AdMed API Trails",
-            //            Contact = new OpenApiContact()
-            //            {
-            //                Email = "karl4798@gmail.com",
-            //                Name = "Karl de Busser",
-            //                Url = new Uri("https://karldebusser.com")
-            //            },
-            //            License = new OpenApiLicense()
-            //            {
-            //                Name = "MIT License",
-            //                Url = new Uri("https://en.wikipedia.org/wiki/MIT_License")
-            //            }
-            //        });
-
-            //    var xmlCommentsFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
-            //    var cmlCommentsFullPath = Path.Combine(AppContext.BaseDirectory, xmlCommentsFile);
-            //    options.IncludeXmlComments(cmlCommentsFullPath);
-            //});
-
             services.AddControllers();
         }
 
@@ -137,7 +86,6 @@ namespace AdMedAPI
             {
                 app.UseDeveloperExceptionPage();
             }
-
             app.UseHttpsRedirection();
             app.UseSwagger();
             app.UseSwaggerUI(options =>
@@ -149,7 +97,6 @@ namespace AdMedAPI
                     }
                     options.RoutePrefix = "";
                 });
-
             app.UseRouting();
             app.UseCors(x => x
                 .AllowAnyOrigin()

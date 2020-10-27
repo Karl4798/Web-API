@@ -13,12 +13,10 @@ namespace AdMedAPI
     public class ConfigureSwaggerOptions : IConfigureOptions<SwaggerGenOptions>
     {
         private readonly IApiVersionDescriptionProvider provider;
-
         public ConfigureSwaggerOptions(IApiVersionDescriptionProvider provider) => this.provider = provider;
 
         public void Configure(SwaggerGenOptions options)
         {
-
             foreach (var desc in provider.ApiVersionDescriptions)
             {
                 options.SwaggerDoc(
@@ -57,12 +55,9 @@ namespace AdMedAPI
                     new List<string>()
                 }
             });
-
             var xmlCommentsFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
                 var cmlCommentsFullPath = Path.Combine(AppContext.BaseDirectory, xmlCommentsFile);
                 options.IncludeXmlComments(cmlCommentsFullPath);
-
         }
-
     }
 }

@@ -1,14 +1,11 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using static AdMedAPI.Models.Resident;
 
 namespace AdMedAPI.Models.Dtos
 {
-
     public class ResidentUpdateDto
     {
-
         // General information of the resident
         public int Id { get; set; }
         [Required] public string FirstName { get; set; }
@@ -31,9 +28,6 @@ namespace AdMedAPI.Models.Dtos
         [Required] public string PharmacyFaxNumber { get; set; }
         [Required] public int PrimaryContactId { get; set; }
         [ForeignKey("PrimaryContactId")] public virtual PrimaryContactResident PrimaryContact { get; set; }
-
         // General information of the primary contact included in PrimaryContact
-
     }
-
 }

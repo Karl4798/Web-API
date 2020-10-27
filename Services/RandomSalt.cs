@@ -1,18 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Threading.Tasks;
+﻿using System.Security.Cryptography;
 
 namespace AdMedAPI.Services
 {
     public class RandomSalt
     {
-
-        /*
-         * Method to create random salt string for password encryption
-         */
-
+        // Method to create random salt string for password encryption
         public static byte[] GetRandomSalt(int length)
         {
             var random = new RNGCryptoServiceProvider();
@@ -21,10 +13,7 @@ namespace AdMedAPI.Services
             return salt;
         }
 
-        /*
-         * Method to create password with salt
-         */
-
+        // Method to create password with salt
         public static byte[] SaltHashPassword(byte[] password, byte[] salt)
         {
             HashAlgorithm algorithm = new SHA256Managed();
@@ -33,14 +22,11 @@ namespace AdMedAPI.Services
             {
                 plainTextWithSaltBytes[i] = password[i];
             }
-
             for (int i = 0; i < salt.Length; i++)
             {
                 plainTextWithSaltBytes[password.Length + i] = salt[i];
             }
-
             return algorithm.ComputeHash(plainTextWithSaltBytes);
         }
-
     }
 }

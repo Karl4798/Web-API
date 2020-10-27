@@ -3,10 +3,8 @@ using System.Collections.Generic;
 
 namespace AdMedAPI.Repository.IRepository
 {
-
     public interface IPostRepository
     {
-
         ICollection<Post> GetPosts();
         Post GetPost(int postId);
         bool CreatePost(Post post);
@@ -14,7 +12,5 @@ namespace AdMedAPI.Repository.IRepository
         bool DeletePost(Post post);
         bool PostExists(int postId);
         bool Save();
-
     }
-
 }

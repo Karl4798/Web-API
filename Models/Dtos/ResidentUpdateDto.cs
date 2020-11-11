@@ -26,6 +26,7 @@ namespace AdMedAPI.Models.Dtos
         [Required] public string PharmacyName { get; set; }
         [Required] public string PharmacyTelephoneNumber { get; set; }
         [Required] public string PharmacyFaxNumber { get; set; }
+        [Required] public string RoomNumber { get; set; }
         [Required] public int PrimaryContactId { get; set; }
         [ForeignKey("PrimaryContactId")] public virtual PrimaryContactResident PrimaryContact { get; set; }
         // General information of the primary contact included in PrimaryContact

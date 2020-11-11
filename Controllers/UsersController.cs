@@ -54,7 +54,7 @@ namespace AdMedAPI.Controllers
             bool passwordsMatch = _userRepo.DoPasswordsMatch(model.Password, model.ConfirmPassword);
             if (!passwordsMatch)
             {
-                return BadRequest(new { message = "Passwords do not match" });
+                return Unauthorized(new { message = "Passwords do not match" });
             }
             var user = _userRepo.Register(model.Username, model.Password, model.FirstName, model.LastName);
             if (user == null)

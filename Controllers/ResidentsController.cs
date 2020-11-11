@@ -50,7 +50,7 @@ namespace AdMedAPI.Controllers
         [HttpGet("{ResidentId:int}", Name="GetResident")]
         [ProducesResponseType(200, Type = typeof(ResidentUpdateDto))]
         [ProducesResponseType(404)]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,Resident")]
         [ProducesDefaultResponseType]
         public IActionResult GetResident(int ResidentId)
         {

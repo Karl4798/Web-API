@@ -29,7 +29,7 @@ namespace AdMedAPI.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Admin,Resident")]
         [ProducesResponseType(200, Type = typeof(List<ResidentUpdateDto>))]
         public IActionResult GetResidents()
         {

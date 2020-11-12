@@ -29,7 +29,6 @@ namespace AdMedAPI.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [Authorize(Roles = "Admin,Resident")]
         [ProducesResponseType(200, Type = typeof(List<PostUpdateDto>))]
         public IActionResult GetPosts()
         {
@@ -50,7 +49,6 @@ namespace AdMedAPI.Controllers
         [HttpGet("{PostId:int}", Name="GetPost")]
         [ProducesResponseType(200, Type = typeof(PostUpdateDto))]
         [ProducesResponseType(404)]
-        [Authorize(Roles = "Admin,Resident")]
         [ProducesDefaultResponseType]
         public IActionResult GetPost(int PostId)
         {

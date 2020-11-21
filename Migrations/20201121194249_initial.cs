@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace AdMedAPI.Migrations
 {
-    public partial class newDatabase : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -113,6 +113,7 @@ namespace AdMedAPI.Migrations
                     PharmacyName = table.Column<string>(nullable: false),
                     PharmacyTelephoneNumber = table.Column<string>(nullable: false),
                     PharmacyFaxNumber = table.Column<string>(nullable: false),
+                    TimeStamp = table.Column<DateTime>(nullable: false),
                     PrimaryContactId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
@@ -150,6 +151,7 @@ namespace AdMedAPI.Migrations
                     PharmacyName = table.Column<string>(nullable: false),
                     PharmacyTelephoneNumber = table.Column<string>(nullable: false),
                     PharmacyFaxNumber = table.Column<string>(nullable: false),
+                    RoomNumber = table.Column<string>(nullable: false),
                     PrimaryContactId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>

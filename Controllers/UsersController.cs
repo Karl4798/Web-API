@@ -70,7 +70,7 @@ namespace AdMedAPI.Controllers
         /// </summary>
         [HttpPost("resetpassword")]
         [Authorize(Roles = "Admin,Resident")]
-        public IActionResult ResetPassword([FromBody] UserResetPasswordDto model)
+        public IActionResult ResetPassword([FromBody] UserPasswordResetDto model)
         {
             bool passwordsMatch = _userRepo.DoPasswordsMatch(model.Password, model.ConfirmPassword);
             if (!passwordsMatch)
@@ -78,6 +78,26 @@ namespace AdMedAPI.Controllers
                 return BadRequest(new { message = "Passwords do not match" });
             }
             var reset = _userRepo.ResetPassword(model.Username, model.Password, model.ConfirmPassword, model.ExistingPassword);
+            if (reset == false)
+            {
+                return BadRequest(new { message = "Error while resetting password" });
+            }
+            return Ok();
+        }
+
+        /// <summary>
+        /// Resets a user password.
+        /// </summary>
+        [HttpPost("adminresetpassword")]
+        [Authorize(Roles = "Admin")]
+        public IActionResult AdminResetPassword([FromBody] AdminPasswordResetDto model)
+        {
+            bool passwordsMatch = _userRepo.DoPasswordsMatch(model.Password, model.ConfirmPassword);
+            if (!passwordsMatch)
+            {
+                return BadRequest(new { message = "Passwords do not match" });
+            }
+            var reset = _userRepo.AdminResetPassword(model.Username, model.Password, model.ConfirmPassword);
             if (reset == false)
             {
                 return BadRequest(new { message = "Error while resetting password" });

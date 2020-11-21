@@ -1,4 +1,7 @@
-﻿namespace AdMedAPI.Dtos.Models
+﻿using AdMedAPI.Models;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace AdMedAPI.Dtos.Models
 {
     public class UserRegisterDto
     {

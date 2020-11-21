@@ -162,5 +162,21 @@ namespace AdMedAPI.Repository
         {
             return _db.SaveChanges() >= 0 ? true : false;
         }
+
+        public bool AdminResetPassword(string username, string password, string confirmpassword)
+        {
+            if (_db.Users.Any(user => user.Username.Equals(username)))
+            {
+                User user = _db.Users.Where(u => u.Username.Equals(username)).First();
+                user.Salt = Convert.ToBase64String(RandomSalt.GetRandomSalt(16)); // Get random salt
+                user.Password = Convert.ToBase64String(RandomSalt.SaltHashPassword(
+                    Encoding.ASCII.GetBytes(password),
+                    Convert.FromBase64String(user.Salt)));
+                _db.Users.Update(user);
+                _db.SaveChanges();
+                return true;
+            }
+            return false;
+        }
     }
 }

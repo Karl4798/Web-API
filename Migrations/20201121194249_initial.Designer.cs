@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AdMedAPI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20201105194549_newDatabase")]
-    partial class newDatabase
+    [Migration("20201121194249_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -84,6 +84,9 @@ namespace AdMedAPI.Migrations
 
                     b.Property<int>("PrimaryContactId")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("TimeStamp")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Undertaker")
                         .IsRequired()
@@ -338,6 +341,10 @@ namespace AdMedAPI.Migrations
 
                     b.Property<int>("PrimaryContactId")
                         .HasColumnType("int");
+
+                    b.Property<string>("RoomNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Undertaker")
                         .IsRequired()

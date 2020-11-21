@@ -7,6 +7,7 @@ namespace AdMedAPI.Repository.IRepository
     {
         bool IsUniqueUser(string username);
         bool ResetPassword(string username, string password, string confirmpassword, string existingpassword);
+        bool AdminResetPassword(string username, string password, string confirmpassword);
         bool DoPasswordsMatch(string password, string confirmPassword);
         bool UpdateUser(User user);
         ICollection<User> GetUsers();

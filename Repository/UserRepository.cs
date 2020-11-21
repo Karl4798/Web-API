@@ -63,25 +63,6 @@ namespace AdMedAPI.Repository
             return null;
         }
 
-        public User GetUser(int id)
-        {
-            var user = _db.Users.FirstOrDefault(a => a.Id == id);
-            if (user != null)
-            {
-                User userObj = new User()
-                {
-                    Id = user.Id,
-                    Role = user.Role,
-                    FirstName = user.FirstName,
-                    LastName = user.LastName,
-                    Username = user.Username,
-                    Password = user.Password
-                };
-                return userObj;
-            }
-            return null;
-        }
-
         public ICollection<User> GetUsers()
         {
             return _db.Users.OrderBy(a => a.Id).ToList();

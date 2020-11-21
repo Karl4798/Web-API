@@ -106,26 +106,6 @@ namespace AdMedAPI.Controllers
         }
 
         /// <summary>
-        /// Get an individual user by id.
-        /// </summary>
-        /// <param name="id">The id of the user</param>
-        /// <returns></returns>
-        [HttpGet("{id}", Name = "GetUserById")]
-        [ProducesResponseType(200, Type = typeof(User))]
-        [ProducesResponseType(404)]
-        [Authorize(Roles = "Admin,Resident")]
-        [ProducesDefaultResponseType]
-        public IActionResult GetUserById(int id)
-        {
-            var obj = _userRepo.GetUser(id);
-            if (obj == null)
-            {
-                return NotFound();
-            }
-            return Ok(obj);
-        }
-
-        /// <summary>
         /// Fetches a list of all users.
         /// </summary>
         /// <returns></returns>

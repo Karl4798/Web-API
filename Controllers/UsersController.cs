@@ -112,7 +112,7 @@ namespace AdMedAPI.Controllers
         [HttpGet]
         [Authorize(Roles = "Admin")]
         [ProducesResponseType(200, Type = typeof(List<UserUpdateDto>))]
-        public IActionResult GetApplications()
+        public IActionResult GetUsers()
         {
             var objList = _userRepo.GetUsers();
             var objDto = new List<UserUpdateDto>();

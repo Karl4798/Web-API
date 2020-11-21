@@ -11,6 +11,7 @@ namespace AdMedAPI.Repository.IRepository
         bool UpdateUser(User user);
         ICollection<User> GetUsers();
         User GetUser(string username);
+        User GetUser(int id);
         User Authenticate(string username, string password);
         User Register(string username, string password, string firstname, string lastname);
         bool Save();

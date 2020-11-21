@@ -9,6 +9,7 @@ using AdMedAPI.Data;
 using AdMedAPI.Models;
 using AdMedAPI.Repository.IRepository;
 using AdMedAPI.Services;
+using System.Collections.Generic;
 
 namespace AdMedAPI.Repository
 {
@@ -60,6 +61,11 @@ namespace AdMedAPI.Repository
                 return userObj;
             }
             return null;
+        }
+
+        public ICollection<User> GetUsers()
+        {
+            return _db.Users.OrderBy(a => a.Id).ToList();
         }
 
         public User Authenticate(string username, string password)

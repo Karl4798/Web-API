@@ -6,6 +6,7 @@ using AdMedAPI.Dtos.Models;
 using Microsoft.AspNetCore.Http;
 using AdMedAPI.Models.Dtos;
 using AutoMapper;
+using System.Collections.Generic;
 
 namespace AdMedAPI.Controllers
 {
@@ -102,6 +103,24 @@ namespace AdMedAPI.Controllers
                 return NotFound();
             }
             return Ok(obj);
+        }
+
+        /// <summary>
+        /// Fetches a list of all users.
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        [ProducesResponseType(200, Type = typeof(List<UserUpdateDto>))]
+        public IActionResult GetApplications()
+        {
+            var objList = _userRepo.GetUsers();
+            var objDto = new List<UserUpdateDto>();
+            foreach (var obj in objList)
+            {
+                objDto.Add(_mapper.Map<UserUpdateDto>(obj));
+            }
+            return Ok(objDto);
         }
 
         /// <summary>

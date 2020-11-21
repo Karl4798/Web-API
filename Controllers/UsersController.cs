@@ -86,18 +86,18 @@ namespace AdMedAPI.Controllers
         }
 
         /// <summary>
-        /// Get an individual user by username.
+        /// Get an individual user by id.
         /// </summary>
         /// <param name="username">The email of the user</param>
         /// <returns></returns>
-        [HttpGet("{username}", Name = "GetUser")]
+        [HttpGet("{id}", Name = "GetUser")]
         [ProducesResponseType(200, Type = typeof(User))]
         [ProducesResponseType(404)]
         [Authorize(Roles = "Admin,Resident")]
         [ProducesDefaultResponseType]
-        public IActionResult GetUser(string username)
+        public IActionResult GetUser(int id)
         {
-            var obj = _userRepo.GetUser(username);
+            var obj = _userRepo.GetUser(id);
             if (obj == null)
             {
                 return NotFound();

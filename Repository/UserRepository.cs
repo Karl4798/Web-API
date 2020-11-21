@@ -44,9 +44,9 @@ namespace AdMedAPI.Repository
             return true;
         }
 
-        public User GetUser(string username)
+        public User GetUser(int id)
         {
-            var user = _db.Users.FirstOrDefault(a => a.Username == username);
+            var user = _db.Users.FirstOrDefault(a => a.Id == id);
             if (user != null)
             {
                 User userObj = new User()
@@ -116,7 +116,7 @@ namespace AdMedAPI.Repository
             userObj.Password = Convert.ToBase64String(RandomSalt.SaltHashPassword(
                 Encoding.ASCII.GetBytes(password),
                 Convert.FromBase64String(userObj.Salt)));
-            userObj.Role = "Resident";
+            userObj.Role = "Locked";
             _db.Users.Add(userObj);
             _db.SaveChanges();
             userObj.Password = "";

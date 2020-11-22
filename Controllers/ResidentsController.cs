@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -15,9 +14,11 @@ namespace AdMedAPI.Controllers
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public class ResidentsController : ControllerBase
     {
+        // Injected dependencies
         private readonly IResidentRepository _reRepo;
         private readonly IMapper _mapper;
 
+        // Constructor
         public ResidentsController(IResidentRepository ResidentRepo, IMapper mapper)
         {
             _reRepo = ResidentRepo;
@@ -25,7 +26,7 @@ namespace AdMedAPI.Controllers
         }
 
         /// <summary>
-        /// Fetches a list of all Residents.
+        /// Fetches a list of all residents.
         /// </summary>
         /// <returns></returns>
         [HttpGet]
@@ -118,7 +119,7 @@ namespace AdMedAPI.Controllers
         }
 
         /// <summary>
-        /// Deletes an resident.
+        /// Deletes a specific resident.
         /// </summary>
         /// <returns></returns>
         [HttpDelete("{ResidentId:int}", Name = "DeleteResident")]

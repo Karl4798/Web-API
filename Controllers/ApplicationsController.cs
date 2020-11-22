@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -11,14 +10,15 @@ using AdMedAPI.Repository.IRepository;
 namespace AdMedAPI.Controllers
 {
     [Route("api/v{version:apiVersion}/[controller]")]
-    //[Route("api/[controller]")]
     [ApiController]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public class ApplicationsController : ControllerBase
     {
+        // Injected dependencies
         private readonly IApplicationRepository _apRepo;
         private readonly IMapper _mapper;
 
+        // Constructor
         public ApplicationsController(IApplicationRepository applicationRepo, IMapper mapper)
         {
             _apRepo = applicationRepo;
@@ -119,7 +119,7 @@ namespace AdMedAPI.Controllers
         }
 
         /// <summary>
-        /// Deletes an application.
+        /// Deletes a specific application.
         /// </summary>
         /// <returns></returns>
         [HttpDelete("{ApplicationId:int}", Name = "DeleteApplication")]

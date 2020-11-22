@@ -5,9 +5,10 @@ using Newtonsoft.Json;
 
 namespace AdMedAPI.Models
 {
+    // Application entity
     public class Application
     {
-        // General information of the applicant
+        // Application fields stored in the database
         [Key] public int Id { get; set; }
         [Required] public string FirstName { get; set; }
         [Required] public string LastName { get; set; }

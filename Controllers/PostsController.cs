@@ -14,9 +14,11 @@ namespace AdMedAPI.Controllers
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public class PostsController : ControllerBase
     {
+        // Injected dependencies
         private readonly IPostRepository _psRepo;
         private readonly IMapper _mapper;
 
+        // Constructor
         public PostsController(IPostRepository PostRepo, IMapper mapper)
         {
             _psRepo = PostRepo;
@@ -24,7 +26,7 @@ namespace AdMedAPI.Controllers
         }
 
         /// <summary>
-        /// Fetches a list of all Posts.
+        /// Fetches a list of all posts.
         /// </summary>
         /// <returns></returns>
         [HttpGet]
@@ -41,7 +43,7 @@ namespace AdMedAPI.Controllers
         }
 
         /// <summary>
-        /// Get an individual Post.
+        /// Get an individual post.
         /// </summary>
         /// <param name="PostId">the Id of the Post</param>
         /// <returns></returns>
@@ -61,7 +63,7 @@ namespace AdMedAPI.Controllers
         }
 
         /// <summary>
-        /// Create a new Post.
+        /// Create a new post.
         /// </summary>
         /// <returns></returns>
         [HttpPost]
@@ -87,7 +89,7 @@ namespace AdMedAPI.Controllers
         }
 
         /// <summary>
-        /// Updates a specific Post.
+        /// Updates a specific post.
         /// </summary>
         /// <returns></returns>
         [HttpPatch("{PostId:int}", Name = "UpdatePost")]
@@ -111,7 +113,7 @@ namespace AdMedAPI.Controllers
         }
 
         /// <summary>
-        /// Deletes an Post.
+        /// Deletes a specific post.
         /// </summary>
         /// <returns></returns>
         [HttpDelete("{PostId:int}", Name = "DeletePost")]

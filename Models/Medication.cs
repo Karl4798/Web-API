@@ -3,8 +3,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AdMedAPI.Models
 {
+    // Medication entity
     public class Medication
     {
+        // Medication fields stored in the database
         [Key]
         public int Id { get; set; }
         [Required] public string Name { get; set; }

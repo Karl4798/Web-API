@@ -15,9 +15,12 @@ namespace AdMedAPI.Repository
 {
     public class UserRepository : IUserRepository
     {
+        // Injected dependancy for the application database context
         private readonly ApplicationDbContext _db;
+        // Injected dependancy for app settings
         private readonly AppSettings _appSettings;
 
+        // Constructor
         public UserRepository(ApplicationDbContext db, IOptions<AppSettings> appSettings)
         {
             _db = db;

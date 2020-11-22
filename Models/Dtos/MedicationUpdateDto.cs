@@ -3,8 +3,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AdMedAPI.Models.Dtos
 {
+    // MedicationUpdate Dto
     public class MedicationUpdateDto
     {
+        // Medication information
         public int Id { get; set; }
         [Required] public string Name { get; set; }
         [Required] public int Quantity { get; set; }

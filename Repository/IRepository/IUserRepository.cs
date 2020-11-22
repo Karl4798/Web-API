@@ -3,8 +3,10 @@ using System.Collections.Generic;
 
 namespace AdMedAPI.Repository.IRepository
 {
+    // User repository interface
     public interface IUserRepository
     {
+        // All methods implemented in the repository
         bool IsUniqueUser(string username);
         bool ResetPassword(string username, string password, string confirmpassword, string existingpassword);
         bool AdminResetPassword(string username, string password, string confirmpassword);

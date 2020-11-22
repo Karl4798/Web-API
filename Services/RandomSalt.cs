@@ -2,9 +2,10 @@
 
 namespace AdMedAPI.Services
 {
+    // Helper class used to create a random salt for each account password
     public class RandomSalt
     {
-        // Method to create random salt string for password encryption
+        // Method used to create random salt string for password encryption
         public static byte[] GetRandomSalt(int length)
         {
             var random = new RNGCryptoServiceProvider();
@@ -13,7 +14,7 @@ namespace AdMedAPI.Services
             return salt;
         }
 
-        // Method to create password with salt
+        // Method used to create password with salt
         public static byte[] SaltHashPassword(byte[] password, byte[] salt)
         {
             HashAlgorithm algorithm = new SHA256Managed();

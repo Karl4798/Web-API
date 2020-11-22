@@ -1,5 +1,6 @@
 ﻿namespace AdMedAPI.Dtos.Models
 {
+    // AdminPasswordReset Dto
     public class AdminPasswordResetDto
     {
         public string Username { get; set; }

@@ -7,10 +7,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace AdMedAPI.Repository
 {
+    // Application repository used for CRUD operations against the database
     public class ApplicationRepository : IApplicationRepository
     {
+        // Injected dependancy for the application database context
         private readonly ApplicationDbContext _db;
 
+        // Constructor
         public ApplicationRepository(ApplicationDbContext db)
         {
             _db = db;

@@ -3,8 +3,10 @@ using AdMedAPI.Models;
 
 namespace AdMedAPI.Repository.IRepository
 {
+    // Resident repository interface
     public interface IResidentRepository
     {
+        // All methods implemented in the repository
         ICollection<Resident> GetResidents();
         Resident GetResident(int ResidentId);
         bool ResidentExists(string id);

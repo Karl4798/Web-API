@@ -9,8 +9,10 @@ namespace AdMedAPI.Repository
 {
     public class ResidentRepository : IResidentRepository
     {
+        // Injected dependancy for the application database context
         private readonly ApplicationDbContext _db;
 
+        // Constructor
         public ResidentRepository(ApplicationDbContext db)
         {
             _db = db;

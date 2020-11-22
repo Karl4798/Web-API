@@ -3,8 +3,10 @@ using AdMedAPI.Models;
 
 namespace AdMedAPI.Repository.IRepository
 {
+    // Medication repository interface
     public interface IMedicationRepository
     {
+        // All methods implemented in the repository
         ICollection<Medication> GetMedications();
         Medication GetMedication(int applicationId);
         bool CreateMedication(Medication application);

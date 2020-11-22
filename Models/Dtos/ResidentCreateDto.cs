@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AdMedAPI.Models.Dtos
 {
+    // ResidentCreate Dto
     public class ResidentCreateDto
     {
         // General information of the resident
@@ -28,6 +29,6 @@ namespace AdMedAPI.Models.Dtos
         [Required] public string RoomNumber { get; set; }
         [Required] public int PrimaryContactId { get; set; }
         [ForeignKey("PrimaryContactId")] public virtual PrimaryContactResident PrimaryContact { get; set; }
-        // General information of the primary contact included in PrimaryContact
+        // General information of the primary contact included in PrimaryContactResident
     }
 }

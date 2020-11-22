@@ -14,9 +14,11 @@ namespace AdMedAPI.Controllers
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     public class MedicationsController : ControllerBase
     {
+        // Injected dependencies
         private readonly IMedicationRepository _meRepo;
         private readonly IMapper _mapper;
 
+        // Constructor
         public MedicationsController(IMedicationRepository medicationRepo, IMapper mapper)
         {
             _meRepo = medicationRepo;
@@ -24,7 +26,7 @@ namespace AdMedAPI.Controllers
         }
 
         /// <summary>
-        /// Fetches a list of all medications.
+        /// Fetches a list of all medications for all residents.
         /// </summary>
         /// <returns></returns>
         [HttpGet]
@@ -112,7 +114,7 @@ namespace AdMedAPI.Controllers
         }
 
         /// <summary>
-        /// Deletes an medication.
+        /// Deletes a specific medication.
         /// </summary>
         /// <returns></returns>
         [HttpDelete("{MedicationId:int}", Name = "DeleteMedication")]

@@ -3,8 +3,10 @@ using System.ComponentModel.DataAnnotations;
 
 namespace AdMedAPI.Models
 {
+    // Post entity
     public class Post
     {
+        // Post fields stored in the database
         [Key]
         public int Id { get; set; }
         [Required] public string PostName { get; set; }

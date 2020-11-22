@@ -8,8 +8,10 @@ namespace AdMedAPI.Repository
 {
     public class PostRepository : IPostRepository
     {
+        // Injected dependancy for the application database context
         private readonly ApplicationDbContext _db;
 
+        // Constructor
         public PostRepository(ApplicationDbContext db)
         {
             _db = db;

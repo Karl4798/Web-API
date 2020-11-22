@@ -2,8 +2,10 @@
 
 namespace AdMedAPI.Models
 {
+    // PrimaryContactResident entity
     public class PrimaryContactResident
     {
+        // PrimaryContactResident fields stored in the database
         [Key]
         public int Id { get; set; }
         [Required] public string FirstName { get; set; }

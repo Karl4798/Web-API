@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AdMedAPI.Models.Dtos
 {
+    // ApplicationCreate Dto
     public class ApplicationCreateDto
     {
         // General information of the applicant
@@ -27,6 +28,6 @@ namespace AdMedAPI.Models.Dtos
         public DateTime TimeStamp { get; set; }
         [Required] public int PrimaryContactId { get; set; }
         [ForeignKey("PrimaryContactId")] public virtual PrimaryContactApplication PrimaryContact { get; set; }
-        // General information of the primary contact included in PrimaryContact
+        // General information of the primary contact included in PrimaryContactApplication
     }
 }

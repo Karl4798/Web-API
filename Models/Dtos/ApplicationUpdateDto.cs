@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AdMedAPI.Models.Dtos
 {
+    // ApplicationUpdate Dto
     public class ApplicationUpdateDto
     {
         // General information of the applicant
@@ -30,6 +31,6 @@ namespace AdMedAPI.Models.Dtos
         public bool Invisible { get; set; }
         [Required] public int PrimaryContactId { get; set; }
         [ForeignKey("PrimaryContactId")] public virtual PrimaryContactApplication PrimaryContact { get; set; }
-        // General information of the primary contact included in PrimaryContact
+        // General information of the primary contact included in PrimaryContactApplication
     }
 }

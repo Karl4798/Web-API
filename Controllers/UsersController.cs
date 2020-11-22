@@ -16,9 +16,11 @@ namespace AdMedAPI.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
+        // Injected dependencies
         private readonly IUserRepository _userRepo;
         private readonly IMapper _mapper;
 
+        // Constructor
         public UsersController(IUserRepository userRepo, IMapper mapper)
         {
             _userRepo = userRepo;
@@ -86,7 +88,7 @@ namespace AdMedAPI.Controllers
         }
 
         /// <summary>
-        /// Resets a user password.
+        /// Resets a user password without requiring confirmation of the existing password - admin only.
         /// </summary>
         [HttpPost("adminresetpassword")]
         [Authorize(Roles = "Admin")]
@@ -108,7 +110,7 @@ namespace AdMedAPI.Controllers
         /// <summary>
         /// Get an individual user by id.
         /// </summary>
-        /// <param name="username">The email of the user</param>
+        /// <param name="id">The id of the user</param>
         /// <returns></returns>
         [HttpGet("{id}", Name = "GetUser")]
         [ProducesResponseType(200, Type = typeof(User))]

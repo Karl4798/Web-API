@@ -4,10 +4,13 @@ using AutoMapper;
 
 namespace AdMedAPI.AdMedMapper
 {
+    // Helper class used for auto mappings of all entities and Dtos
     public class AdMedMappings : Profile
     {
+        // Auto mapper constructor
         public AdMedMappings()
         {
+            // Auto mappings for all Dtos and database entities
             CreateMap<Application, ApplicationCreateDto>().ReverseMap();
             CreateMap<Application, ApplicationUpdateDto>().ReverseMap();
             CreateMap<Resident, ResidentCreateDto>().ReverseMap();

@@ -21,7 +21,7 @@ namespace AdMedAPI.Repository
 
         public ICollection<Application> GetApplications()
         {
-            return _db.Applications.Include(a => a.PrimaryContact).OrderBy(a => a.Id).ToList();
+            return _db.Applications.Include(a => a.PrimaryContact).OrderByDescending(a => a.TimeStamp).ToList();
         }
 
         public Application GetApplication(int applicationId)

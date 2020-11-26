@@ -19,7 +19,7 @@ namespace AdMedAPI.Repository
 
         public ICollection<Post> GetPosts()
         {
-            return _db.Posts.OrderBy(a => a.Id).ToList();
+            return _db.Posts.OrderByDescending(a => a.TimeStamp).ToList();
         }
 
         public Post GetPost(int postId)
